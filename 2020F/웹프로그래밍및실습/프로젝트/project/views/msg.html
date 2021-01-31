@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<head>
+  <link rel="stylesheet" href="/main.css">
+</head>
+<div class="timeline">
+  {% if user %}
+  <div>
+    <form id="twit-form" action="/msg" method="post">
+      <input id="twit-update-id" type="hidden" name="update_id" value="{{update_id}}"></input>
+      <div class="input-group">
+        <textarea id="twit-title" name="receiver_email" placeholder="받는 사람"></textarea>
+        <textarea id="twit" name="content" placeholder="메시지 내용"></textarea>
+      </div>
+      <div>
+        <button id="twit-btn" type="submit" class="btn">발송</button>
+      </div>
+    </form>
+  </div>
+  {% endif %}
+  <div class="twits">
+    {% for twit in twits %}
+    <div class="twit">
+      <input type="hidden" value="{{twit.User.id}}" class="twit-user-id">
+      <input type="hidden" value="{{twit.id}}" class="twit-id">
+      <div class="twit-author">{{'보낸 사람: ' + twit.sender}}</div>
+      <div class="twit-time">{{twit.createdAt}}</div>
+      {% if twit.receiver == user.email %}
+      <form id="twit-delete" action="/msg/delete" method="post" style="display:inline-block">
+        <input id="delete-twit-id" value="{{twit.id}}" type="hidden" name="postid">
+        <button class="twit_delete" type="submit">삭제</button>
+      </form>
+      {% endif %}
+      <div class="twit-comment">{{twit.content}}</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

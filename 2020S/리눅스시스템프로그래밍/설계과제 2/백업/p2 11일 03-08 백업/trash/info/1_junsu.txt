@@ -1,0 +1,4 @@
+[Trash Info]
+/home/seunghun/Desktop/p2/check/test1/test2/test3/junsu.txt
+D : 2020-05-09 20:34:52
+M : 2020-05-09 20:34:08

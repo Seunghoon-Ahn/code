@@ -1,0 +1,4 @@
+SELECT student_name, SUM(if(grade='F', 0, credit)) as '총이수학점'
+FROM (student natural join takes) join Course using (course_id)
+WHERE student_id in (SELECT student_id FROM Takes as S WHERE S.grade = 'F')
+GROUP BY student_name;

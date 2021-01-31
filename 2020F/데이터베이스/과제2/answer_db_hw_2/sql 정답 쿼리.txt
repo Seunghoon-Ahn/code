@@ -1,0 +1,120 @@
+#1
+select student_id, student_name
+from Student
+where home_address = "부산";
+
+#2
+select professor_name, dept_name
+from Professor
+where professor_id not in(select professor_id from Advisor);
+
+#3
+select professor_name, dept_name, salary
+from Professor
+where salary > (select Avg(salary)
+from Professor);
+
+#4
+select takes.student_id, student_name, Sum(IF(grade = "F", 0, credit)) as sumCredit
+from takes left join student
+on takes.student_id = student.student_id
+left join course
+on takes.course_id = course.course_id
+where takes.student_id in (select distinct student_id
+from takes
+where grade = "F")
+group by takes.student_id;
+
+#5
+select SN.student_name, SN.student_id, Sum(IF(grade = "F", 0, credit)) as sum_credits
+from (select student_name, student_id, dept_name
+from Student
+where student_name like "김%") as SN left join Takes
+on SN.student_id = Takes.student_id
+left join Course
+on Takes.course_id = Course.course_id
+group by student_id;
+
+#6
+select Student.dept_name, Sum(credit)/count as sumCredit
+from Takes left join Course
+on Takes.course_id = Course.course_id
+left join Student
+on Takes.student_id = Student.student_id
+left join (select dept_name, count(distinct takes.student_id) as count
+from takes left join student
+on takes.student_id = student.student_id
+group by dept_name) as SC
+on Student.dept_name = SC.dept_name
+where grade <> "F"
+group by dept_name;
+
+#7
+select Student.student_id, Student.student_name, Student.dept_name, Sum(IF(grade = "F", 0, credit)) as sum_credits
+from Takes left join Course
+on Takes.course_id = Course.course_id
+left join Student
+on Takes.student_id = Student.student_id
+group by student_id
+having sum_credits >= (select Sum(IF(grade = "F",0, credit)) as sum
+from Takes left join Course
+on Takes.course_id = Course.course_id) / (select Count(distinct student_id) as count
+from Takes);
+
+#8
+select student_name
+from Student
+where dept_name = (select dept_name
+from Department
+where budget = (select Max(budget) from Department));
+
+#9
+select student.student_id, student_name, sum_credit, student.dept_name, professor_name
+from advisor left join student
+on advisor.student_id = student.student_id
+left join professor
+on advisor.professor_id = professor.professor_id
+left join (select student_id, Sum(IF(grade = "F", 0, credit)) as sum_credit
+from takes left join course
+on takes.course_id = course.course_id
+group by student_id) as SC
+on advisor.student_id = SC.student_id
+where home_address = "서울";
+
+#10
+select title, student_name, grade
+from Teaches left join Professor
+on Teaches.professor_id = Professor.professor_id
+left join Course
+on Teaches.course_id = Course.course_id
+left join Takes
+on Teaches.course_id = Takes.course_id and Teaches.year = Takes.year
+and Teaches.section_id = Takes.section_id and Teaches.semester = Takes.semester
+left join Student
+on Takes.student_id = Student.student_id
+where Teaches.year = "2018" and Teaches.semester = "Fall" and Takes.student_id is not null and professor_name like "박%" and Professor.dept_name = "컴퓨터학부";
+
+#11
+with recursive func as(
+	select prereq_id
+    from Prereq natural join Course
+    where title = "알고리즘"
+    union all
+    select P.prereq_id
+    from Prereq as P
+    inner join func on p.course_id = func.prereq_id
+)
+select distinct title
+from func left join Course
+on func.prereq_id = Course.course_id;
+
+#12
+update professor
+set professor.salary = case
+when professor.salary >= 70 then professor.salary*0.97
+else professor.salary*1.05
+end;
+
+#13
+delete from student
+where timestampdiff(YEAR, admission_date, now()) > 4;

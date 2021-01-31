@@ -1,0 +1,3 @@
+SELECT professor_name, dept_name
+FROM professor
+WHERE professor_id NOT IN (SELECT professor_id FROM advisor);

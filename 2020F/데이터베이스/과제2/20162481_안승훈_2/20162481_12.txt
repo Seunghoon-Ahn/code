@@ -1,0 +1,6 @@
+UPDATE Professor
+SET salary = case
+	when salary * 1000000 < 70000000 Then salary * 1.05
+	else salary * 0.97
+	end
+;

@@ -1,0 +1,34 @@
+{
+  "fruits" : [
+    {
+      "name" : "Apple",
+      "price" : 10
+    },
+    {
+      "name" : "Mango",
+      "price": 40
+    },
+    {
+      "name" : "Orange",
+      "price" : 25
+    },
+    {
+      "name" : "Lime",
+      "price" : 35
+    }
+  ],
+  "vegetables" : [
+    {
+      "name" : "Potato",
+      "price" : 20
+    },
+    {
+      "name" : "Spinach",
+      "price" : 15
+    },
+    {
+      "name" : "Broccoli",
+      "price" : 30
+    }
+  ]
+}

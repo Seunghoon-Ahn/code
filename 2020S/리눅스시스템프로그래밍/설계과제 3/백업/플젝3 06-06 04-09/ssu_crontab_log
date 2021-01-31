@@ -1,0 +1,2 @@
+[Fri Jun  5 23:30:31 2020] add * * * * * echo "echo every minute" > echomsg.txt
+[Fri Jun  5 23:30:36 2020] remove * * * * * echo "echo every minute" > echomsg.txt

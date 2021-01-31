@@ -1,0 +1,4 @@
+[Wed Jun  3 18:50:11 2020] ./ssu_rsync src dst
+    a.txt 27bytes
+    b.txt 13bytes
+[Wed Jun  3 19:12:03 2020] ./ssu_rsync src dst

@@ -1,0 +1,4 @@
+SELECT student_name, student_id, SUM(CASE WHEN grade <> 'F' THEN credit END) '총이수학점'
+FROM (Student natural join Takes) natural join Course
+WHERE student_name LIKE '김%'
+GROUP BY student_name, student_id;

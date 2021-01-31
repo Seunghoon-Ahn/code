@@ -1,0 +1,11 @@
+SELECT student_id, student_name, dept_name, SUM(credit) as '총이수학점'
+FROM Student natural join Takes natural join Course
+WHERE grade <> 'F'
+GROUP BY student_id
+HAVING SUM(credit) >= (
+	(SELECT SUM(credit)
+	FROM Student natural join Takes natural join Course 
+	WHERE grade <> 'F')
+	/(SELECT count(*) FROM Student)
+	)
+;

@@ -1,0 +1,10 @@
+SELECT student_name FROM Student
+WHERE dept_name = (
+	SELECT D.dept_name 
+	FROM Department as D 
+	WHERE budget = (
+		SELECT max(budget)
+		FROM Department
+		)
+	)
+;

@@ -1,0 +1,3 @@
+SELECT student_id, student_name
+FROM student
+WHERE home_address = '부산';

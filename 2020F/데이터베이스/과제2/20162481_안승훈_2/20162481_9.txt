@@ -1,0 +1,4 @@
+SELECT student_id, student_name, SUM(CASE WHEN grade <> 'F' THEN credit END) as '총이수학점', dept_name, professor_name as '지도교수'
+FROM Student natural join Department natural join advisor natural join professor natural join Takes natural join Course
+WHERE home_address = '서울'
+GROUP BY student_id, student_name;

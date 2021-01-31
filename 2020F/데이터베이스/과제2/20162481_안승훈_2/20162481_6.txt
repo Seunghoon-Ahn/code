@@ -1,0 +1,6 @@
+SELECT dept_name, SUM(CASE WHEN grade <> 'F' THEN credit END)/(SELECT T.num FROM 
+(SELECT dept_name as DN, COUNT(student_name) as num 
+FROM student GROUP BY DN) as T 
+WHERE dept_name = T.DN) '평균이수학점'
+FROM (Student natural join Takes) natural join Course
+GROUP BY dept_name;

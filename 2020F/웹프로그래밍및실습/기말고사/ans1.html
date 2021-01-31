@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Answer 1</title>
+        <script>
+        </script>
+    </head>
+    <body>
+        <h1 id="first">First</h1>
+        <h1 id="second">Second</h1>
+        <h1 id="third">Third</h1>
+        <button onclick="red()">Red</button>
+        <button onclick="blue()">Blue</button>
+    </body>
+    <script>
+        function red() {
+            var tag = document.getElementById("first");
+            tag.style.backgroundColor = '#FF0000';
+        }
+
+        function blue() {
+            var tag1 = document.getElementById("first");
+            var tag2 = document.getElementById("second");
+            var tag3 = document.getElementById("third");
+            tag1.style.backgroundColor = '#0000FF';
+            tag2.style.backgroundColor = '#0000FF';
+            tag3.style.backgroundColor = '#0000FF';
+        }
+        
+    </script>
+</html>

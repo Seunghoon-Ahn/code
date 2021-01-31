@@ -1,0 +1,16 @@
+[Mon Jun  8 03:47:00 2020] run * * * * * echo "echo every minute" > echomsg.txt
+[Mon Jun  8 03:47:00 2020] run */2 * * * * echo "echo every two minutes" > echomsg.txt
+[Mon Jun  8 03:47:53 2020] add 49,50,51,52 * * * * echo "echo 49,50,51,52 minutes" > echomsg.txt
+[Mon Jun  8 03:48:00 2020] run * * * * * echo "echo every minute" > echomsg.txt
+[Mon Jun  8 03:49:00 2020] run * * * * * echo "echo every minute" > echomsg.txt
+[Mon Jun  8 03:49:00 2020] run */2 * * * * echo "echo every two minutes" > echomsg.txt
+[Mon Jun  8 03:49:00 2020] run 49,50,51,52 * * * * echo "echo 49,50,51,52 minutes" > echomsg.txt
+[Mon Jun  8 03:49:43 2020] remove 49,50,51,52 * * * * echo "echo 49,50,51,52 minutes" > echomsg.txt
+[Mon Jun  8 03:50:00 2020] run * * * * * echo "echo every minute" > echomsg.txt
+[Mon Jun  8 03:50:15 2020] add 50-55 * * * * echo " echo 50-55minutes" > echomsg.txt
+[Mon Jun  8 03:51:00 2020] run * * * * * echo "echo every minute" > echomsg.txt
+[Mon Jun  8 03:51:00 2020] run */2 * * * * echo "echo every two minutes" > echomsg.txt
+[Mon Jun  8 03:51:00 2020] run 50-55 * * * * echo " echo 50-55minutes" > echomsg.txt
+[Mon Jun  8 03:51:41 2020] remove */2 * * * * echo "echo every two minutes" > echomsg.txt
+[Mon Jun  8 03:52:00 2020] run * * * * * echo "echo every minute" > echomsg.txt
+[Mon Jun  8 03:52:00 2020] run 50-55 * * * * echo " echo 50-55minutes" > echomsg.txt

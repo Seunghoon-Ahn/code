@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<head>
+    <link rel="stylesheet" href="/main.css">
+</head>
+<div class="timeline">
+    {% if user %}
+    <div>
+        <form id="twit-form" action="/board" method="post">
+            <div class="input-group">
+                <textarea id="twit-title" name="title" placeholder="게시글 제목"></textarea>
+                <textarea id="twit" name="comment" placeholder="게시글 내용"></textarea>
+                <textarea id="twit-title" name="hashtag" placeholder="해시태그 입력"></textarea>
+            </div>
+            <div>
+                <button id="twit-btn" type="submit" class="btn">게시</button>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+    <div class="twits">
+        <form id="hashtag-form" action="/board/hashtag" method="get">
+            <input type="text" name="hashtag" placeholder="해시태그 검색">
+            <button class="btn">검색</button>
+        </form>
+        <form id="hashtag-form" action="/board/userfind" method="get">
+            <input type="text" name="userfind" placeholder="작성자 검색">
+            <button class="btn">검색</button>
+        </form>
+        <form id="hashtag-form" action="/board/strfind" method="get">
+            <input type="text" name="strfind" placeholder="내용 검색">
+            <button class="btn">검색</button>
+        </form>
+        {% for twit in twits %}
+        <div class="twit">
+            <input type="hidden" value="{{twit.User.id}}" class="twit-user-id">
+            <input type="hidden" value="{{twit.id}}" class="twit-id">
+            <div class="twit-author">{{twit.commenter}}</div>
+            <div class="twit-time">{{twit.createdAt}}</div>
+            {% if twit.commenterid == user.id %}
+            <form id="twit-delete" action="/board/delete" method="post" style="display:inline-block">
+                <input id="delete-twit-id" value="{{twit.id}}" type="hidden" name="postid">
+                <button class="twit_delete" type="submit">삭제</button>
+            </form>
+            <form id="twit-update" action="/board/update" method="get" style="display:inline-block">
+                <input id="update-twit-id" value="{{twit.id}}" type="hidden" name="postid">
+                <button class="twit_update" type="submit">수정</button>
+            </form>
+            {% endif %}
+            <h3 class="twit-title">{{twit.title}}</h3>
+            <div class="twit-comment">{{twit.comment}}</div>
+            {%if twit.hashtags %}
+            <div class="tmp">{{''}}</div>
+            {%for hashtag in twit.hashtags %}
+            <div class="twit-content" style="display:inline-block">{{'#' + hashtag}}</div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,3 @@
+WITH RECURSIVE rcs as (
+SELECT distinct prereq_id FROM Course natural join prereq UNION SELECT * FROM rcs)
+SELECT distinct title FROM rcs, Course where prereq_id = course_id;
